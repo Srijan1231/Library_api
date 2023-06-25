@@ -1,4 +1,35 @@
 @rootApi = http://localhost:8000
+@userApi = {{rootApi}}/api/v1/user
 
 ###
 GET {{rootApi}}
+
+#=========== api for user
+###
+GET {{userApi}}
+Content-Type: application/json
+
+{
+    "fName":"Sam",
+    "lName":"Smith",
+    "phone":"0978",
+    "email":"sam@email",
+    "password": "password",
+    "address":"Street 234, Bangkok"
+
+}
+
+###
+POST {{userApi}}
+Content-Type: application/json
+
+{
+    "role":"student",
+    "fName":"Sam",
+    "lName":"Smith",
+    "phone":"0978",
+    "email":"sam@2mail",
+    "password": "password",
+    "address":"Street 234, Bangkok"
+
+}
