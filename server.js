@@ -4,6 +4,7 @@ dotenv.config();
 import express from "express";
 import morgan from "morgan";
 const app = express();
+import cors from "cors";
 
 const PORT = process.env.PORT || 8000;
 
@@ -13,6 +14,7 @@ connectMongoDB();
 // middleware
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(cors());
 // apis
 
 //api for user
