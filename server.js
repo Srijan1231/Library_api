@@ -3,6 +3,7 @@ dotenv.config();
 
 import express from "express";
 import morgan from "morgan";
+
 const app = express();
 import cors from "cors";
 
@@ -19,6 +20,7 @@ app.use(cors());
 
 //api for user
 import userRouter from "./src/Routers/userRouter.js";
+import bookRouter from "./src/Routers/bookRouter.js";
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/user", (req, res) => {
   res.json({
@@ -26,6 +28,7 @@ app.use("/api/v1/user", (req, res) => {
     message: "Server up and running at user",
   });
 });
+app.use("/api/v1/book", bookRouter);
 
 app.use("/", (req, res) => {
   res.json({
