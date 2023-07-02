@@ -1,5 +1,5 @@
 import express from "express";
-import { addBook } from "../models/book/BookModel.js";
+import { addBook, deleteBooks, updateBooks } from "../models/book/BookModel.js";
 import { getBooks } from "../models/book/BookModel.js";
 
 const router = express.Router();
@@ -38,4 +38,43 @@ router.get("/", async (req, res) => {
     });
   }
 });
+router.put("/", async (req, res) => {
+  try {
+    const { __v, _id, ...rest } = req.body;
+    const books = await updateBooks(_id, rest);
+    res.json({
+      status: "success",
+      message: "book has been updated successfullly",
+      books,
+    });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
+});
+router.delete("/:_id", async (req, res) => {
+  try {
+    const { _id } = req.params;
+    const books = await deleteBooks(_id);
+    books?._id
+      ? res.json({
+          status: "success",
+          message: "Book has been deleted",
+          books,
+        })
+      : res.json({
+          status: "error",
+          message: "Unable to delete",
+          books,
+        });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
+});
+
 export default router;
