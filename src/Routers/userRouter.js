@@ -56,7 +56,7 @@ router.post("/login", async (req, res) => {
         user.password = undefined;
         return res.json({
           status: "success",
-          message: "LoggedIn Success",
+          message: `Welcome  ${user.fName}`,
           user,
         });
       }
