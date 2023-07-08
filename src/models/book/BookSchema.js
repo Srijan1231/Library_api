@@ -6,5 +6,17 @@ const bookSchema = new mongoose.Schema({
   year: { type: Number, required: true },
   thumbnail: { type: String, required: true },
   summary: { type: String, required: true },
+  isAvailable: {
+    type: Boolean,
+    default: true,
+  },
+  dueDate: {
+    type: Date,
+    default: null,
+  },
+  returnDate: {
+    type: Date,
+    default: null,
+  },
 });
 export default mongoose.model("Book", bookSchema);

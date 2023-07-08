@@ -1,23 +1,14 @@
 @rootApi = http://localhost:8000
 @userApi = {{rootApi}}/api/v1/user
+@burrowApi = {{rootApi}}/api/v1/burrow
 
 ###
 GET {{rootApi}}
 
 #=========== api for user
 ###
-GET {{userApi}}
-Content-Type: application/json
+GET {{burrowApi}}
 
-{
-    "fName":"Sam",
-    "lName":"Smith",
-    "phone":"0978",
-    "email":"sam@email",
-    "password": "password",
-    "address":"Street 234, Bangkok"
-
-}
 
 ###
 POST {{userApi}}

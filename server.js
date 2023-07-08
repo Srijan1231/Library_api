@@ -28,7 +28,11 @@ app.use("/api/v1/user", (req, res) => {
     message: "Server up and running at user",
   });
 });
+//api for book/
 app.use("/api/v1/book", bookRouter);
+//api for burrowed books/
+import burrowRouter from "./src/Routers/burrowRouter.js";
+app.use("/api/v1/burrow", burrowRouter);
 
 app.use("/", (req, res) => {
   res.json({
