@@ -1,4 +1,4 @@
-# Nodejs FES Template
+# API for library management
 
 # Environment vars
 
