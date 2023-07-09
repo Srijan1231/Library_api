@@ -4,6 +4,7 @@ import {
   addBurrow,
   getBurrowbyUserId,
   getBurrows,
+  updateBurrow,
 } from "../models/burrow/BurrowModel.js";
 import { updateBooks } from "../models/book/BookModel.js";
 
@@ -56,6 +57,34 @@ router.get("/", async (req, res) => {
       message: "Burrowlist",
       burrows,
     });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
+});
+router.put("/", async (req, res) => {
+  try {
+    const { _id } = req.body;
+
+    const presentDate = new Date();
+
+    const returnBooks = await updateBurrow(_id, {
+      isRetured: true,
+      dueDate: null,
+      returnDate: presentDate,
+    });
+
+    returnBooks?._id
+      ? res.json({
+          status: "success",
+          message: "Burrowed books has been updated successfullly",
+        })
+      : res.json({
+          status: "error",
+          message: "Book hasn't been returned",
+        });
   } catch (error) {
     res.json({
       status: "error",
