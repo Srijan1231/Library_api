@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 8000;
 import connectMongoDB from "./src/config/mongoConfig.js";
 connectMongoDB();
 // middleware
+import { auth } from "./src/Middleware/authMiddleware.js";
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cors());
@@ -32,7 +33,7 @@ app.use("/api/v1/user", (req, res) => {
 app.use("/api/v1/book", bookRouter);
 //api for burrowed books/
 import burrowRouter from "./src/Routers/burrowRouter.js";
-app.use("/api/v1/burrow", burrowRouter);
+app.use("/api/v1/burrow", auth, burrowRouter);
 
 app.use("/", (req, res) => {
   res.json({

@@ -1,9 +1,10 @@
 import express from "express";
 import { addBook, deleteBooks, updateBooks } from "../models/book/BookModel.js";
 import { getBooks } from "../models/book/BookModel.js";
+import { auth, authAdmin } from "../Middleware/authMiddleware.js";
 
 const router = express.Router();
-router.post("/", async (req, res) => {
+router.post("/", auth, authAdmin, async (req, res) => {
   try {
     console.log(req.body);
     const result = await addBook(req.body);
@@ -38,7 +39,7 @@ router.get("/", async (req, res) => {
     });
   }
 });
-router.put("/", async (req, res) => {
+router.put("/", auth, authAdmin, async (req, res) => {
   try {
     const { __v, _id, ...rest } = req.body;
     const books = await updateBooks(_id, rest);
@@ -54,7 +55,7 @@ router.put("/", async (req, res) => {
     });
   }
 });
-router.delete("/:_id", async (req, res) => {
+router.delete("/:_id", auth, authAdmin, async (req, res) => {
   try {
     const { _id } = req.params;
     const books = await deleteBooks(_id);

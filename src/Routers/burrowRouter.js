@@ -1,7 +1,12 @@
 import express from "express";
 
-import { addBurrow, getBurrows } from "../models/burrow/BurrowModel.js";
+import {
+  addBurrow,
+  getBurrowbyUserId,
+  getBurrows,
+} from "../models/burrow/BurrowModel.js";
 import { updateBooks } from "../models/book/BookModel.js";
+
 const router = express.Router();
 const twoWeeks = 14;
 router.post("/", async (req, res) => {
@@ -42,7 +47,10 @@ router.post("/", async (req, res) => {
 });
 router.get("/", async (req, res) => {
   try {
-    const burrows = await getBurrows();
+    const { role, _id } = req.userInfo;
+
+    const burrows =
+      role === "admin" ? await getBurrows() : await getBurrowbyUserId(_id);
     res.json({
       status: "success",
       message: "Burrowlist",
