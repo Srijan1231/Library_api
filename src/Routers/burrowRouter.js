@@ -52,6 +52,7 @@ router.get("/", async (req, res) => {
 
     const burrows =
       role === "admin" ? await getBurrows() : await getBurrowbyUserId(_id);
+    console.log(burrows);
     res.json({
       status: "success",
       message: "Burrowlist",
@@ -66,7 +67,7 @@ router.get("/", async (req, res) => {
 });
 router.put("/", async (req, res) => {
   try {
-    const { _id } = req.body;
+    const { _id, bookId } = req.body;
 
     const presentDate = new Date();
 
@@ -75,8 +76,11 @@ router.put("/", async (req, res) => {
       dueDate: null,
       returnDate: presentDate,
     });
-
-    returnBooks?._id
+    const update = await updateBooks(bookId, {
+      isAvailable: true,
+      returnDate: presentDate,
+    });
+    returnBooks?._id && update?._id
       ? res.json({
           status: "success",
           message: "Burrowed books has been updated successfullly",
