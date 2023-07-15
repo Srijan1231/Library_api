@@ -34,6 +34,9 @@ app.use("/api/v1/book", bookRouter);
 //api for burrowed books/
 import burrowRouter from "./src/Routers/burrowRouter.js";
 app.use("/api/v1/burrow", auth, burrowRouter);
+//api for review book
+import reviewRouter from "./src/Routers/reviewRouter.js";
+app.use("/api/v1/review", reviewRouter);
 
 app.use("/", (req, res) => {
   res.json({

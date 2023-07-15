@@ -2,6 +2,7 @@
 @userApi = {{rootApi}}/api/v1/user
 @burrowApi = {{rootApi}}/api/v1/burrow
 
+@reviewApi = {{rootApi}}/api/v1/review
 ###
 GET {{rootApi}}
 
@@ -24,3 +25,5 @@ Content-Type: application/json
     "address":"Street 234, Bangkok"
 
 }
+###
+GET {{reviewApi}}
