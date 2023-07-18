@@ -6,7 +6,6 @@ import { auth, authAdmin } from "../Middleware/authMiddleware.js";
 const router = express.Router();
 router.post("/", auth, authAdmin, async (req, res) => {
   try {
-    console.log(req.body);
     const result = await addBook(req.body);
     result?._id
       ? res.json({
